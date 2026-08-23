@@ -9,24 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCursor();
     runLoader();
     initNavbarScroll();
-    initVideoSound();
 });
-
-// --- Video Sound ---
-function initVideoSound() {
-    const video = document.querySelector('.card-video');
-    const hint = document.querySelector('.sound-hint');
-    if (!video) return;
-
-    // Unmute on first click anywhere
-    document.addEventListener('click', function unmute() {
-        video.muted = false;
-        if (hint) {
-            gsap.to(hint, { opacity: 0, duration: 0.5, onComplete: () => hint.remove() });
-        }
-        document.removeEventListener('click', unmute);
-    }, { once: true });
-}
 
 // --- Smooth Scrolling (Lenis) ---
 function initLenis() {

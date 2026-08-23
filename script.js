@@ -18,14 +18,19 @@ function initVideoSound() {
     const hint = document.querySelector('.sound-hint');
     if (!video) return;
 
-    // Unmute on first click anywhere
-    document.addEventListener('click', function unmute() {
+    function unmute() {
         video.muted = false;
+        video.play();
         if (hint) {
             gsap.to(hint, { opacity: 0, duration: 0.5, onComplete: () => hint.remove() });
         }
         document.removeEventListener('click', unmute);
-    }, { once: true });
+        document.removeEventListener('touchstart', unmute);
+    }
+
+    // Unmute on first tap/click anywhere
+    document.addEventListener('click', unmute, { once: true });
+    document.addEventListener('touchstart', unmute, { once: true });
 }
 
 // --- Smooth Scrolling (Lenis) ---
